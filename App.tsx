@@ -3,7 +3,6 @@ import AppLoading from 'expo-app-loading';
 import { ThemeProvider} from 'styled-components'
 
 
-
 import {
   useFonts,
   Inter_400Regular,
