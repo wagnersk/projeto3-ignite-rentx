@@ -16,7 +16,7 @@ export const Content = styled.View`
   justify-content: center;
   align-items: center;
 
-  padding-bottom: 30px;
+  padding-bottom: 80px;
 
 `;
 
