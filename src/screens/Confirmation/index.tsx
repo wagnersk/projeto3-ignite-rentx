@@ -50,6 +50,8 @@ export function Confirmation(){
         <Content>
             <DoneSvg width={80} height={80}/>
             <Title>{title}</Title>
+            {console.log(nextScreenRoute)}
+
             
             <Message>
                 {message}

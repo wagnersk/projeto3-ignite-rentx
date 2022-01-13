@@ -5,12 +5,13 @@ import {
  //  StyleSheet,
   } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
-import Logo from '../../assets/logo.svg';
 
-import { api} from '../../services/api'
 import { database } from '../../database'
+import { api} from '../../services/api'
 
+import Logo from '../../assets/logo.svg';
 import { CarDTO } from '../../dtos/CarDTO'
+
 import { Car} from '../../components/Car'
 import { LoadAnimation} from '../../components/LoadAnimation'
 
@@ -54,7 +55,9 @@ export function Home(){
 
   const [cars,setCars] = useState<ModelCar[]>([])
   const [loading,setLoading] = useState(true)
+
   const netInfo = useNetInfo()
+  const navigation = useNavigation()
 
 /*
   const positionY = useSharedValue(0)
@@ -86,23 +89,17 @@ export function Home(){
 
     }
 
-  }) */
+  }) 
 
-
-  const navigation = useNavigation()
- // const theme = useTheme()
-
+  const theme = useTheme()
   
-
-  function handleCarDetails(car:CarDTO) {
-    navigation.navigate('CarDetails', { car })
-  }
-
-  /* function handleOpenMyCars(car:CarDTO) {
+   function handleOpenMyCars(car:CarDTO) {
     navigation.navigate('MyCars', { car })
   }
  */
-
+ function handleCarDetails(car:CarDTO) {
+    navigation.navigate('CarDetails', { car })
+  }
 
     async function offlineSynchronize() {
       await synchronize({
@@ -112,15 +109,13 @@ export function Home(){
           .get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`)
 
           const {changes,latestVersion } = response.data;
-         
           return {changes,timestamp: latestVersion}
 
 
         },
         pushChanges: async({ changes })=>{
           const user= changes.users;
-
-          await api.post('/users/sync', user)
+          await api.post('/users/sync', user).catch(console.log)
 
         }
 
